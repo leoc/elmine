@@ -154,19 +154,6 @@ Either :ok or :unprocessible."
           ((eq status 404)
            (signal 'no-such-resource `(:response ,response))))))
 
-(defun elmine/api-response-body (response-buffer)
-  "Retrieves the body from a url response buffer."
-  (let ((response-body ""))
-    (save-excursion
-      (switch-to-buffer response-buffer)
-      (beginning-of-buffer)
-      (when (re-search-forward "^$" nil t)
-        (forward-char 1)
-        (kill-region (point-min) (point)))
-      (setq response-body (url-unhex-string (buffer-string)))
-      (kill-buffer))
-    response-body))
-
 (defun elmine/api-get-all (element path &rest filters)
   (let* ((response-object (apply #'elmine/api-get nil path filters))
          (offset (elmine/get response-object :offset))
