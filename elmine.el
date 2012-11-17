@@ -2,7 +2,7 @@
 
 ;; Copyright (C) 2012 Arthur Leonard Andersen
 
-;; Author: Arthur Andersen <leoc DOT git AT gmail.com>
+;; Author: Arthur Andersen <leoc.git@gmail.com>
 ;; Version: 0.3
 ;; Keywords: tools
 
