@@ -97,7 +97,6 @@ plist of PARAMS for the query."
             ("X-Redmine-API-Key" . ,redmine-api-key)))
          (url-request-data data)
          header-end status header body)
-    (message "HTTP %s Request %s with data: %s" method url data)
     (save-excursion
       (switch-to-buffer (url-retrieve-synchronously url))
       (beginning-of-buffer)
