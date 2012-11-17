@@ -229,65 +229,110 @@ an issue object to this function."
   "Deletes an issue with a specific id."
   (elmine/api-delete (format "/issues/%s.json" id)))
 
-(defun elmine/get-time-entries (&rest filters)
-  "Gets all time entries.
+(defun elmine/get-issue-time-entries (issue-id &rest filters)
+  "Gets all time entries for a specific issue."
+  (apply #'elmine/api-get-all :time_entries
+         (format "/issues/%s/time_entries.json" issue-id) filters))
 
-Returns a list of plists with the following properties:
-
-'((:issue_id \"\"))"
-  (let ((filters (plist-merge '(:limit 100) filters)))
-    (apply #'elmine/api-get-all :time_entries filters)))
-
-(defun elmine/get-attachments (issue-id)
-  "")
-
-(defun elmine/get-relations (issue-id)
-  "")
-
-(defun elmine/set-assignee (id assignee_id)
-  "")
-
-(defun elmine/add-issue-to-version ()
-  "")
+(defun elmine/get-issue-relations (issue-id)
+  "Get all relations for a specific issue."
+  (apply #'elmine/api-get-all :relations
+         (format "/issues/%s/relations.json" issue-id) nil))
 
 (defun elmine/get-project-issues (project &rest filters)
   "Get all issues for a specific project."
-  (let ((filters (plist-merge '(:limit 100 :status_id "open") filters)))
-    (message "\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\nFILTERS: %S" filters)
-    (apply #'elmine/api-get-all :issues filters)))
+  (let ((filters (plist-merge '(:status_id "open") filters)))
+    (apply #'elmine/api-get-all :issues
+           (format "/project/%s/issues.json" project) filters)))
 
 (defun elmine/get-projects (&rest filters)
-  "")
-
-(defun elmine/create-project (project)
-  "")
+  "Get a list with projects."
+  (apply #'elmine/api-get-all :projects "/projects.json" filters))
 
 (defun elmine/get-project (project)
-  "")
+  "Get a specific project."
+  (elmine/api-get :project (format "/projects/%s.json" project)))
 
-(defun elmine/update-project (project &rest attributes)
-  "")
+(defun elmine/create-project (&rest params)
+  "Create a new project."
+  (let ((object (if (listp (car params)) (car params) params)))
+    (elmine/api-post :project object "/projects.json")))
+
+(defun elmine/update-project (&rest params)
+  "Update a given project."
+  (let* ((object (if (listp (car params)) (car params) params))
+         (identifier (plist-get object :identifier)))
+    (elmine/api-put :project object
+                    (format "/projects/%s.json" identifier))))
 
 (defun elmine/delete-project (project)
-  "")
+  "Deletes a project."
+  (elmine/api-delete (format "/projects/%s.json" project)))
 
-(defun elmine/create-version (&rest attributes)
-  "")
+(defun elmine/get-project-categories (project &rest filters)
+  "Get all categories for a project."
+  (apply #'elmine/api-get-all :issue_categories
+         (format "/projects/%s/issue_categories.json" project) filters))
+
+(defun elmine/get-project-issues (project &rest filters)
+  "Get a list of issues for a specific project."
+  (apply #'elmine/api-get-all :issues
+         (format "/projects/%s/issues.json" project) filters))
+
+(defun elmine/get-project-versions (project &rest filters)
+  "Get a list of versions for a specific project."
+  (apply #'elmine/api-get-all :versions
+         (format "/projects/%s/versions.json" project) filters))
+
+(defun elmine/get-version (id)
+  "Get a specific version."
+  (elmine/api-get :version (format "/versions/%s.json" id)))
+
+(defun elmine/create-version (&rest params)
+  "Create a new version."
+  (let* ((object (if (listp (car params)) (car params) params))
+         (project (plist-get object :project_id)))
+    (elmine/api-post :version object
+                     (format "/projects/%s/versions.json" project))))
+
+(defun elmine/update-version (&rest params)
+  "Update a given version."
+  (let* ((object (if (listp (car params)) (car params) params))
+         (id (plist-get object :id)))
+    (elmine/api-put :version object
+                    (format "/versions/%s.json" id))))
 
 (defun elmine/get-issue-statuses ()
-  "")
+  "Get a list of available issue statuses."
+  (elmine/api-get-all :issue_statuses "/issue_statuses.json"))
 
 (defun elmine/get-trackers ()
-  "Gets a list of tracker names and their IDs.")
+  "Get a list of tracker names and their IDs."
+  (elmine/api-get-all :trackers "/trackers.json"))
 
 (defun elmine/get-issue-priorities ()
-  "Gets a list of issue priorities and their IDs.")
+  "Get a list of issue priorities and their IDs."
+  (elmine/api-get-all :issue_priorities "/enumerations/issue_priorities.json"))
 
-(defun elmine/get-time-entry-activities ()
-  "Gets a list of time entry activities and their IDs.")
+(defun elmine/get-time-entries (&rest filters)
+  "Get a list of time entries."
+  (apply #'elmine/api-get-all :time_entries "/time_entries.json" filters))
 
-(defun elmine/get-custom-fields ()
-  "Gets a list of available custom fields.")
+(defun elmine/get-time-entry (id)
+  "Get a specific time entry."
+  (elmine/api-get :time_entry (format "/time_entries/%s.json" id)))
 
-(defun elmine/get-categories ()
-  "")
+(defun elmine/create-time-entry (&rest params)
+  "Create a new time entry"
+  (let* ((object (if (listp (car params)) (car params) params)))
+    (elmine/api-post :time_entry object "/time_entries.json")))
+
+(defun elmine/update-time-entry (&rest params)
+  "Update a given time entry."
+  (let* ((object (if (listp (car params)) (car params) params))
+         (id (plist-get object :id)))
+    (elmine/api-put :time_entry object (format "/time_entries/%s.json" id))))
+
+(defun elmine/delete-time-entry (id)
+  "Delete a specific time entry."
+  (elmine/api-delete (format "/time_entries/%s.json" id)))

@@ -22,6 +22,44 @@
 
 (elmine/delete-issue 101)
 
-(elmine/get-time-entries)
+(elmine/get-issue-time-entries 4)
+
+(elmine/get-issue-relations 99)
+
+(elmine/get-projects)
+
+(elmine/get-project "personal")
+
+(elmine/create-project :name "Ein Test-Project" :identifier "test-project")
+
+(elmine/update-project '(:identifier "test-project" :name "Ein neuer Test-Projekt-Name"))
+
+(elmine/delete-project "test-project")
+
+(elmine/get-project-categories "personal")
+
+(elmine/get-project-issues "personal")
+
+(elmine/get-project-versions "personal")
+
+(elmine/get-version 16)
+
+(elmine/create-version :project_id "personal" :name "ABCDEFG")
+
+(elmine/update-version :id 18 :name "XYZ")
+
+(elmine/get-issue-statuses)
+
+(elmine/get-trackers)
+
+(elmine/get-issue-priorities)
 
 (elmine/get-time-entries)
+
+(elmine/get-time-entry 1)
+
+(elmine/create-time-entry :issue_id 93 :activity_id 1 :hours "2.0")
+
+(elmine/update-time-entry :id 5 :hours "3.0")
+
+(elmine/delete-time-entry 5)

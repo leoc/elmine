@@ -24,6 +24,13 @@ dynamically.
     (redmine/get-issues))
 #+END_SRC
 
+** WAITING implement `elmine/get-issue-priorities &rest filters`
+   - State "WAITING"    from "TODO"       [2012-11-17 Sat 15:10] \\
+     Waiting for Redmine 2.2.0
+** WAITING implement `elmine/get-time-entry-activities &rest filters` :time:entry:
+   - State "WAITING"    from "TODO"       [2012-11-17 Sat 15:09] \\
+     Waiting for Redmine 2.2.0
+
 ** DONE implement `elmine/api-(get/post/put/delete)-raw`
    CLOSED: [2012-11-17 Sat 13:51]
    - State "DONE"       from "NEXT"       [2012-11-17 Sat 13:51]
@@ -43,8 +50,9 @@ dynamically.
     - status code or status symbol/keyword
     - response body
     - parse object from the response object
-
-** TODO implement better API abstraction
+** DONE implement better API abstraction
+   CLOSED: [2012-11-17 Sat 15:21]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 15:21]
    Essentially I want to be able to create arbitrary API requests as
    easily as possible.
 
@@ -64,26 +72,82 @@ dynamically.
 ** DONE implement `elmine/update-issue (issue-obj)`                  :issues:
    CLOSED: [2012-11-17 Sat 13:52]
    - State "DONE"       from "TODO"       [2012-11-17 Sat 13:52]
-** TODO implement `elmine/delete-issue id`                           :issues:
-** TODO implement `elmine/set-assignee id assignee`                  :issues:
-** TODO implement `elmine/set-version id version-id`                 :issues:
-** TODO implement `elmine/get-issue-attachments issue-id`            :issues:
-** TODO implement `elmine/get-issue-relations issue-id`              :issues:
-** TODO implement `elmine/get-projects &rest filters`              :projects:
-** TODO implement `elmine/get-project project`                     :projects:
-** TODO implement `elmine/create-project (&rest attr/project-obj)` :projects:
-** TODO implement `elmine/update-project project-obj`              :projects:
-** TODO implement `elmine/delete-project project`                  :projects:
-** TODO implement `elmine/get-project-trackers project`            :projects:
-** TODO implement `elmine/get-project-issues project &rest filters` :projects:
-** TODO implement `elmine/get-project-versions project &rest filters` :projects:
-** TODO implement `elmine/create-version project &rest attr`
-** TODO implement `elmine/get-versions project &rest attr`
-** TODO implement `elmine/get-version version-id`
-** TODO implement `elmine/update-version version-id &rest attr`
-** TODO implement `elmine/get-issue-statuses &rest filters`
-** TODO implement `elmine/get-trackers &rest filters`
-** TODO implement `elmine/get-issue-priorities &rest filters`
-** TODO implement `elmine/get-custom-fields &rest filters`
-** TODO implement `elmine/get-categories &rest filters`
-** TODO implement `elmine/get-time-entries &rest filters`
+** DONE implement `elmine/delete-issue id`                           :issues:
+   CLOSED: [2012-11-17 Sat 14:24]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 14:24]
+** DONE implement `elmine/get-issue-time-entries issue-id`           :issues:
+   CLOSED: [2012-11-17 Sat 15:19]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 15:19]
+** DONE implement `elmine/get-issue-relations issue-id`              :issues:
+   CLOSED: [2012-11-17 Sat 15:25]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 15:25]
+** DONE implement `elmine/get-projects &rest filters`              :projects:
+   CLOSED: [2012-11-17 Sat 15:26]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 15:26]
+** DONE implement `elmine/get-project project`                     :projects:
+   CLOSED: [2012-11-17 Sat 15:34]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 15:34]
+** DONE implement `elmine/create-project (&rest attr/project-obj)` :projects:
+   CLOSED: [2012-11-17 Sat 15:34]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 15:34]
+** DONE implement `elmine/update-project (&rest attr/project-obj)` :projects:
+   CLOSED: [2012-11-17 Sat 15:34]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 15:34]
+** DONE implement `elmine/delete-project project`                  :projects:
+   CLOSED: [2012-11-17 Sat 15:35]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 15:35]
+** DONE implement `elmine/get-project-categories project &rest filters` :projects:
+   CLOSED: [2012-11-17 Sat 15:35]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 15:35]
+** DONE implement `elmine/get-project-issues project &rest filters` :projects:
+   CLOSED: [2012-11-17 Sat 15:39]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 15:39]
+** DONE implement `elmine/get-project-versions project &rest filters` :projects:
+   CLOSED: [2012-11-17 Sat 15:42]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 15:42]
+** DONE implement `elmine/get-version version-id`                  :versions:
+   CLOSED: [2012-11-17 Sat 15:50]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 15:50]
+** DONE implement `elmine/create-version (&rest attr/version-obj)` :versions:
+   CLOSED: [2012-11-17 Sat 15:53]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 15:53]
+** DONE implement `elmine/update-version (&rest attr/version-obj)` :versions:
+   CLOSED: [2012-11-17 Sat 15:53]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 15:53]
+** DONE implement `elmine/get-issue-statuses &rest filters`
+   CLOSED: [2012-11-17 Sat 15:02]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 15:02]
+** DONE implement `elmine/get-trackers`
+   CLOSED: [2012-11-17 Sat 14:56]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 14:56]
+** DONE implement `elmine/get-time-entries &rest filters`        :timeentry:
+** DONE implement `elmine/get-time-entry id`                      :timeentry:
+   CLOSED: [2012-11-17 Sat 16:05]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 16:05]
+** DONE implement `elmine/create-time-entry &rest params/time-entry-obj` :timeentry:
+   CLOSED: [2012-11-17 Sat 16:07]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 16:07]
+** DONE implement `elmine/update-time-entry time-entry-obj`       :timeentry:
+   CLOSED: [2012-11-17 Sat 16:11]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 16:11]
+** DONE implement `elmine/delete-time-entry id`                   :timeentry:
+   CLOSED: [2012-11-17 Sat 16:12]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 16:12]
+** CANCELLED implement `elmine/issue-log-time (id &rest params)`     :issues:
+   CLOSED: [2012-11-17 Sat 16:17]
+   - State "CANCELLED"  from "TODO"       [2012-11-17 Sat 16:17] \\
+     This is covered by `elmine/create-time-entry`
+** CANCELLED implement `elmine/get-project-trackers project`       :projects:
+   CLOSED: [2012-11-17 Sat 15:37]
+   - State "CANCELLED"  from "TODO"       [2012-11-17 Sat 15:37] \\
+     There is no such functionality of the Redmine API to get the trackers
+     for a specific project only. You may only include the trackers when
+     fetching the information for a specific project.
+** CANCELLED implement `elmine/get-custom-fields &rest filters`
+   CLOSED: [2012-11-17 Sat 15:59]
+   - State "CANCELLED"  from "TODO"       [2012-11-17 Sat 15:59] \\
+     I did not find an applicable API feature for this.
+** CANCELLED implement `elmine/get-categories &rest filters`
+   CLOSED: [2012-11-17 Sat 15:04]
+   - State "CANCELLED"  from "TODO"       [2012-11-17 Sat 15:04] \\
+     This is associated with a project. See `elmine/get-project-categories`
