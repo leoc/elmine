@@ -1,3 +1,11 @@
+;; I´m currently not very confident writing tests. Especially when in
+;; the need for mocking URL requests.
+
+;; Currently this file only contains expressions that I ran against my
+;; personal redmine to verify the functionality.
+
+;; TODO: Write real tests.
+
 (elmine/api-raw "GET" "/issues/93.json" nil nil)
 
 (elmine/api-raw "POST" "/projects/personal/issues.json"
