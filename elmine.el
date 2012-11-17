@@ -84,13 +84,19 @@ the dynamically bound `redmine-api-key` and `redmine-host` variables."
 (defun elmine/api-raw (method path data params)
   "Perform a raw HTTP request with given METHOD, a relative PATH and a
 plist of PARAMS for the query."
-  (let ((url (elmine/api-build-url path params))
-        (url-request-method method)
-        (url-request-extra-headers
-         `(("Content-Type" . "application/json")
-           ("X-Redmine-API-Key" . ,redmine-api-key)))
-        (url-request-data data)
-        header-end status header body)
+  (let* ((redmine-host (if (boundp 'redmine-host)
+                           redmine-host
+                         elmine/host))
+         (redmine-api-key (if (boundp 'redmine-api-key)
+                              redmine-api-key
+                            elmine/api-key))
+         (url (elmine/api-build-url path params))
+         (url-request-method method)
+         (url-request-extra-headers
+          `(("Content-Type" . "application/json")
+            ("X-Redmine-API-Key" . ,redmine-api-key)))
+         (url-request-data data)
+         header-end status header body)
     (message "HTTP %s Request %s with data: %s" method url data)
     (save-excursion
       (switch-to-buffer (url-retrieve-synchronously url))
