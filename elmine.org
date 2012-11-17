@@ -1,0 +1,89 @@
+* elmine
+
+~elmine~ is a simple package to interact with the redmine restful
+webservice easily. Essentially it abstracts most API calls to the
+Redmine API.
+
+** Usage
+
+To access the Redmine API you have to specifiy the redmine to access
+and the API key to access it with. That´s either done via setting the
+variables ~redmine/host~ and ~redmine/api-key~
+
+#+BEGIN_SRC elisp
+(setq elmine/host "https://www.my-redmine.org")
+(setq elmine/api-key "abcdefghijklmnopqrstuvwxyz1234567890")
+#+END_SRC
+
+or bind the variables ~redmine-host~ and ~redmine-api-key~
+dynamically.
+
+#+BEGIN_SRC elisp
+  (let ((redmine-host "https://www.my-redmine.org")
+        (redmine-api-key "acdefghijklmnopqrstuvwxyz1234567890"))
+    (redmine/get-issues))
+#+END_SRC
+
+** DONE implement `elmine/api-(get/post/put/delete)-raw`
+   CLOSED: [2012-11-17 Sat 13:51]
+   - State "DONE"       from "NEXT"       [2012-11-17 Sat 13:51]
+   :LOGBOOK:
+   CLOCK: [2012-11-16 Fri 18:57]--[2012-11-16 Fri 19:22] =>  0:25
+   CLOCK: [2012-11-16 Fri 17:18]--[2012-11-16 Fri 17:43] =>  0:25
+   :END:
+   - to get/post/put/delete the raw data
+   - the normal ones then just retrieve the specified element from the
+     parsed object
+
+*** DONE implement proper plist as API-call return value for elmine
+    CLOSED: [2012-11-17 Sat 13:51]
+    - State "DONE"       from "TODO"       [2012-11-17 Sat 13:51]
+    The returned plist should contain:
+
+    - status code or status symbol/keyword
+    - response body
+    - parse object from the response object
+
+** TODO implement better API abstraction
+   Essentially I want to be able to create arbitrary API requests as
+   easily as possible.
+
+   (elmine/api-post :issue object)
+   (elmine/api-get :issue "/issues/123.json")
+   (elmine/api-delete :issue "/issues/123.json")
+
+** DONE implement `elmine/get-issues`                                :issues:
+   CLOSED: [2012-11-17 Sat 13:51]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 13:51]
+** DONE implement `elmine/get-issue`                                 :issues:
+   CLOSED: [2012-11-17 Sat 13:52]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 13:52]
+** DONE implement `elmine/create-issue (&rest attr/issue-obj)`       :issues:
+   CLOSED: [2012-11-17 Sat 13:52]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 13:52]
+** DONE implement `elmine/update-issue (issue-obj)`                  :issues:
+   CLOSED: [2012-11-17 Sat 13:52]
+   - State "DONE"       from "TODO"       [2012-11-17 Sat 13:52]
+** TODO implement `elmine/delete-issue id`                           :issues:
+** TODO implement `elmine/set-assignee id assignee`                  :issues:
+** TODO implement `elmine/set-version id version-id`                 :issues:
+** TODO implement `elmine/get-issue-attachments issue-id`            :issues:
+** TODO implement `elmine/get-issue-relations issue-id`              :issues:
+** TODO implement `elmine/get-projects &rest filters`              :projects:
+** TODO implement `elmine/get-project project`                     :projects:
+** TODO implement `elmine/create-project (&rest attr/project-obj)` :projects:
+** TODO implement `elmine/update-project project-obj`              :projects:
+** TODO implement `elmine/delete-project project`                  :projects:
+** TODO implement `elmine/get-project-trackers project`            :projects:
+** TODO implement `elmine/get-project-issues project &rest filters` :projects:
+** TODO implement `elmine/get-project-versions project &rest filters` :projects:
+** TODO implement `elmine/create-version project &rest attr`
+** TODO implement `elmine/get-versions project &rest attr`
+** TODO implement `elmine/get-version version-id`
+** TODO implement `elmine/update-version version-id &rest attr`
+** TODO implement `elmine/get-issue-statuses &rest filters`
+** TODO implement `elmine/get-trackers &rest filters`
+** TODO implement `elmine/get-issue-priorities &rest filters`
+** TODO implement `elmine/get-custom-fields &rest filters`
+** TODO implement `elmine/get-categories &rest filters`
+** TODO implement `elmine/get-time-entries &rest filters`
