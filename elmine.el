@@ -165,16 +165,22 @@ Either :ok or :unprocessible."
                                   (plist-put filters :offset (+ offset limit))))
       issue-list)))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Simple JSON decode/encode functions ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun elmine/api-decode (json-string)
   "Parses a JSON string and returns an object. Per default JSON objects are
 going to be hashtables and JSON arrays are going to be lists."
-  (let ((json-object-type 'plist)
-        (json-array-type 'list))
-    (condition-case err
-        (json-read-from-string json-string)
-      (json-readtable-error
-       (message "%s: Could not parse json-string into an object. See %s"
-                (error-message-string err) json-string)))))
+  (if (null json-string)
+      nil
+    (let ((json-object-type 'plist)
+          (json-array-type 'list))
+      (condition-case err
+          (json-read-from-string json-string)
+        (json-readtable-error
+         (message "%s: Could not parse json-string into an object. See %s"
+                  (error-message-string err) json-string))))))
 
 (defun elmine/api-encode (object)
   "Return a JSON representation from the given object."
