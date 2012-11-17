@@ -215,7 +215,8 @@ an issue object to this function."
 
 (defun elmine/update-issue (object)
   "Update an issue. The object passed to this function gets updated."
-  (elmine/api-put :issue object "/issues.json"))
+  (let ((id (plist-get object :id)))
+    (elmine/api-put :issue object (format "/issues/%s.json" id))))
 
 (defun elmine/delete-issue (id)
   "Deletes an issue with a specific id."
