@@ -48,9 +48,9 @@ Example:
           (setq ret nil)))
       ret)))
 
-;;---------------------------------------------
-;; HTTP functions using Emacs URL package
-;;---------------------------------------------
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; HTTP functions using Emacs URL package ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun elmine/make-key (string)
   (make-symbol (format ":%s" (s-dashed-words string))))
 
@@ -196,9 +196,10 @@ going to be hashtables and JSON arrays are going to be lists."
        (message "%s: Could not encode object into JSON string. See %s"
                 (error-message-string err) object)))))
 
-;;---------------------------------------------
-;; API functions to retrieve data from redmine
-;;---------------------------------------------
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; API functions to retrieve data from redmine ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun elmine/get-issues (&rest filters)
   "Get a list of issues."
   (let ((filters (plist-merge '(:limit 100 :status_id "open") filters)))
