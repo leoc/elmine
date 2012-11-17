@@ -165,7 +165,9 @@ Either :ok or :unprocessible."
          (limit (elmine/get response-object :limit))
          (total-count (elmine/get response-object :total_count))
          (issue-list (elmine/get response-object element)))
-    (if (< (+ offset limit) total-count)
+    (if (and offset
+             limit
+             (< (+ offset limit) total-count))
         (append issue-list (apply #'elmine/api-get-all element path
                                   (plist-put filters :offset (+ offset limit))))
       issue-list)))
