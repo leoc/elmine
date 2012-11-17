@@ -139,8 +139,11 @@ Either :ok or :unprocessible."
   (let* ((params (if (listp (car params)) (car params) params))
          (data (elmine/api-encode `(,element ,object)))
          (response (elmine/api-raw "PUT" path data params))
-         (object (elmine/api-decode (plist-get response :body))))
-    object))
+         (object (elmine/api-decode (plist-get response :body)))
+         (status (elmine/get response :status :code)))
+    (cond ((eq status 200) t)
+          ((eq status 404)
+           (signal 'no-such-resource `(:response ,response))))))
 
 (defun elmine/api-delete (path &rest params)
   "Does an http DELETE request and returns the body of the response."
