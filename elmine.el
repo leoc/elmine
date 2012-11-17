@@ -205,7 +205,7 @@ going to be hashtables and JSON arrays are going to be lists."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun elmine/get-issues (&rest filters)
   "Get a list of issues."
-  (let ((filters (plist-merge '(:limit 100 :status_id "open") filters)))
+  (let ((filters (plist-merge '(:status_id "open") filters)))
     (apply #'elmine/api-get-all :issues "/issues.json" filters)))
 
 (defun elmine/get-issue (id)
