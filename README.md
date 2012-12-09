@@ -20,10 +20,6 @@ dynamically.
           (redmine-api-key "acdefghijklmnopqrstuvwxyz1234567890"))
       (redmine/get-issues))
 
-## To Do
-
-Have a look at the `elmine.org` file.
-
 ## License
 
 Copyright (C) 2012 Arthur Leonard Andersen
