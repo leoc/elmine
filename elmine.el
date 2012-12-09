@@ -371,3 +371,7 @@ an issue object to this function."
 (defun elmine/delete-time-entry (id)
   "Delete a specific time entry."
   (elmine/api-delete (format "/time_entries/%s.json" id)))
+
+(provide 'elmine)
+
+;;; elmine.el ends here
