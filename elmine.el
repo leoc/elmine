@@ -274,12 +274,6 @@ an issue object to this function."
   (apply #'elmine/api-get-all :relations
          (format "/issues/%s/relations.json" issue-id) nil))
 
-(defun elmine/get-project-issues (project &rest filters)
-  "Get all issues for a specific project."
-  (let ((filters (plist-merge '(:status_id "open") filters)))
-    (apply #'elmine/api-get-all :issues
-           (format "/project/%s/issues.json" project) filters)))
-
 (defun elmine/get-projects (&rest filters)
   "Get a list with projects."
   (apply #'elmine/api-get-all :projects "/projects.json" filters))
