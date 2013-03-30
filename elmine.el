@@ -356,6 +356,11 @@ an issue object to this function."
   "Get a specific time entry."
   (elmine/api-get :time_entry (format "/time_entries/%s.json" id)))
 
+(defun elmine/get-time-entry-activities (&rest params)
+  "Get a list of time entry activities."
+  (apply #'elmine/api-get-all :time_entry_activities
+         "/enumerations/time_entry_activities.json" params))
+
 (defun elmine/create-time-entry (&rest params)
   "Create a new time entry"
   (let* ((object (if (listp (car params)) (car params) params)))
