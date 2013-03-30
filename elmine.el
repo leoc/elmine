@@ -335,6 +335,11 @@ an issue object to this function."
   "Get a list of available issue statuses."
   (elmine/api-get-all :issue_statuses "/issue_statuses.json"))
 
+(defun elmine/get-issue-priorities (&rest params)
+  "Get a list of issue priorities."
+  (apply #'elmine/api-get-all :issue_priorities
+         "/enumerations/issue_priorities.json" params))
+
 (defun elmine/get-trackers ()
   "Get a list of tracker names and their IDs."
   (elmine/api-get-all :trackers "/trackers.json"))
