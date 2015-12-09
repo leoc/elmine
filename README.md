@@ -18,7 +18,7 @@ dynamically.
 
     (let ((redmine-host "https://www.my-redmine.org")
           (redmine-api-key "acdefghijklmnopqrstuvwxyz1234567890"))
-      (redmine/get-issues))
+      (elmine/get-issues))
 
 ## License
 
