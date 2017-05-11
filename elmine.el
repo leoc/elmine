@@ -231,7 +231,7 @@ going to be hashtables and JSON arrays are going to be lists."
   (let ((json-object-type 'plist)
         (json-array-type 'list))
     (condition-case err
-        (json-encode object)
+        (encode-coding-string (json-encode object) 'utf-8)
       (json-readtable-error
        (message "%s: Could not encode object into JSON string. See %s"
                 (error-message-string err) object)))))
