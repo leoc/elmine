@@ -245,9 +245,9 @@ going to be hashtables and JSON arrays are going to be lists."
   (let ((filters (plist-merge '(:status_id "open") filters)))
     (apply #'elmine/api-get-all :issues "/issues.json" filters)))
 
-(defun elmine/get-issue (id)
+(defun elmine/get-issue (id &rest params)
   "Get a specific issue via id."
-  (elmine/api-get :issue (format "/issues/%s.json" id)))
+  (elmine/api-get :issue (format "/issues/%s.json" id) params))
 
 (defun elmine/create-issue (&rest params)
   "Create an issue.
