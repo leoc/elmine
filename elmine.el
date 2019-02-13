@@ -315,6 +315,11 @@ an issue object to this function."
   (apply #'elmine/api-get-all :versions
          (format "/projects/%s/versions.json" project) filters))
 
+(defun elmine/get-project-memberships (project &rest filters)
+  "Get PROJECT memberships limited by FILTERS."
+  (apply #'elmine/api-get-all :memberships
+         (format "/projects/%s/memberships.json" project) filters))
+
 (defun elmine/get-version (id)
   "Get a specific version."
   (elmine/api-get :version (format "/versions/%s.json" id)))
@@ -377,6 +382,15 @@ an issue object to this function."
 (defun elmine/delete-time-entry (id)
   "Delete a specific time entry."
   (elmine/api-delete (format "/time_entries/%s.json" id)))
+
+(defun elmine/get-users (&rest filters)
+  "Get a list of users limited by FILTERS."
+  (apply #'elmine/api-get-all :users "/users.json" filters))
+
+(defun elmine/get-user (user &rest params)
+  "Get USER. PARAMS can be used to retrieve additional details.
+If USER is `current', get user whose credentials are used."
+  (elmine/api-get :user (format "/users/%s.json" user) params))
 
 (provide 'elmine)
 
