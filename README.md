@@ -1,6 +1,6 @@
 # elmine
 
-~elmine~ is a simple package to interact with the redmine restful
+`elmine` is a simple package to interact with the redmine restful
 webservice easily. Essentially it abstracts most API calls to the
 Redmine API.
 
@@ -8,12 +8,12 @@ Redmine API.
 
 To access the Redmine API you have to specifiy the redmine to access
 and the API key to access it with. That´s either done via setting the
-variables ~redmine/host~ and ~redmine/api-key~
+variables `redmine/host` and `redmine/api-key`
 
     (setq elmine/host "https://www.my-redmine.org")
     (setq elmine/api-key "abcdefghijklmnopqrstuvwxyz1234567890")
 
-or bind the variables ~redmine-host~ and ~redmine-api-key~
+or bind the variables `redmine-host` and `redmine-api-key`
 dynamically.
 
     (let ((redmine-host "https://www.my-redmine.org")
