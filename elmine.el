@@ -197,16 +197,36 @@ Either :ok or :unprocessible."
            (signal 'no-such-resource `(:response ,response))))))
 
 (defun elmine/api-get-all (element path &rest filters)
-  (let* ((response-object (apply #'elmine/api-get nil path filters))
+  "Return list of ELEMENT items retrieved from PATH limited by FILTERS.
+
+Limiting items by count can be done using `limit' in FILTERS:
+- If `limit' is t, return all items.
+- If `limit' is number, return items up to that count.
+- Otherwise return up to 25 items (redmine api default)."
+  (let* ((initial-limit (plist-get filters :limit))
+         (initial-limit (when (or
+                               (eq t initial-limit)
+                               (numberp initial-limit))
+                          initial-limit))
+         (limit (if (eq t initial-limit) 100 initial-limit))
+         (response-object (apply #'elmine/api-get nil path (plist-put filters :limit limit)))
          (offset (elmine/get response-object :offset))
          (limit (elmine/get response-object :limit))
          (total-count (elmine/get response-object :total_count))
          (issue-list (elmine/get response-object element)))
     (if (and offset
              limit
-             (< (+ offset limit) total-count))
-        (append issue-list (apply #'elmine/api-get-all element path
-                                  (plist-put filters :offset (+ offset limit))))
+             (< (+ offset limit) total-count)
+             (or (eq t initial-limit)
+                 (and initial-limit (< (+ offset limit) initial-limit))))
+        (let* ((offset (+ offset limit))
+               (limit (if (eq t initial-limit)
+                          t
+                        (- initial-limit offset))))
+          (append issue-list (apply #'elmine/api-get-all element path
+                                    (plist-merge
+                                     filters
+                                     `(:offset ,offset :limit ,limit)))))
       issue-list)))
 
 
@@ -242,8 +262,7 @@ going to be hashtables and JSON arrays are going to be lists."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun elmine/get-issues (&rest filters)
   "Get a list of issues."
-  (let ((filters (plist-merge '(:limit 100) filters)))
-    (apply #'elmine/api-get-all :issues "/issues.json" filters)))
+  (apply #'elmine/api-get-all :issues "/issues.json" filters))
 
 (defun elmine/get-issue (id &rest params)
   "Get a specific issue via id."
